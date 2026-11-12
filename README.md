@@ -81,7 +81,7 @@ This project is an **AI agent that takes real actions**, not just a chatbot. You
 ## Project Structure
 
 ```
-paypal-agent/
+paypilot/
 ├── server.js        # Main server and routes
 ├── ai.js            # Gemini AI parsing of commands
 ├── paypal.js        # PayPal API calls (payouts)
