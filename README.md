@@ -4,9 +4,19 @@
 
 **Example:** `Pay Meera $50 and Arjun $75`
 
-![Payment received](screenshots/payment-received.png)
-![Payment received 2](screenshots/payment-received1.png)
-![Payment received 3](screenshots/payment-received2.png)
+## Demo
+
+**1. Paying one person:** `Pay Meera $50`
+
+![Paying Meera $50](screenshots/payment-received.png)
+
+**2. Paying two people in one message:** `Pay Meera $50 and Arjun $75`
+
+![Paying Meera $50 and Arjun $75 together](screenshots/payment-received1.png)
+
+**3. Arjun's account receiving $75**
+
+![Arjun receives $75](screenshots/payment-received2.png)
 
 ---
 
