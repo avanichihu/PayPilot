@@ -1,4 +1,4 @@
-# PayPal Payments Agent
+# PayPilot
 
 > Type a payment in plain English. An AI agent understands it, asks you to confirm, and sends it through PayPal.
 
