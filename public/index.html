@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PayPal Payments Agent</title>
+<title>PayPilot</title>
 <style>
   body{font-family:system-ui,sans-serif;max-width:560px;margin:40px auto;padding:0 16px;color:#111}
-  h1{font-size:22px}
+  h1{font-size:26px;margin-bottom:4px}
+  .tagline{margin:0 0 16px;color:#475569;font-size:15px}
   textarea{width:100%;height:80px;padding:10px;font-size:16px;box-sizing:border-box;border:1px solid #ccc;border-radius:8px}
   button{padding:10px 16px;font-size:15px;border:0;border-radius:8px;cursor:pointer;background:#0070ba;color:#fff;margin-top:8px}
   button.secondary{background:#e5e7eb;color:#111;margin-left:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+  button.chip{padding:8px 14px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#111;margin:0;font-size:14px}
+  button.chip:hover{background:#eef2ff;border-color:#6366f1}
+  .badge{margin:14px 0;padding:10px 14px;border-radius:10px;background:#ecfdf5;color:#065f46;font-size:13px;line-height:1.5}
   .card{border:1px solid #ddd;border-radius:10px;padding:14px;margin-top:16px}
   .row{padding:6px 0;border-bottom:1px solid #eee}
   .msg{margin-top:16px;padding:12px;border-radius:8px;background:#f3f4f6}
@@ -18,15 +23,31 @@
 </style>
 </head>
 <body>
-<h1>PayPal Payments Agent (Sandbox)</h1>
+<h1>PayPilot</h1>
+<p class="tagline">Type a payment. AI sends it. You stay in control.</p>
+
 <textarea id="cmd" placeholder="e.g. Pay Meera $50 and Arjun $75, or Invoice Ravi $200 for logo design, due Friday"></textarea>
+
+<div class="chips">
+  <button type="button" class="chip" data-text="Pay Meera $50">Pay Meera $50</button>
+  <button type="button" class="chip" data-text="Pay Meera $50 and Arjun $75">Pay Meera $50 and Arjun $75</button>
+  <button type="button" class="chip" data-text="Pay Sam $20">Pay Sam $20</button>
+</div>
+
 <button id="go">Send</button>
+
+<div class="badge"><b>Safety:</b> Sandbox mode &bull; Nothing is sent until you confirm &bull; Unknown contacts are blocked</div>
+
 <div id="out"></div>
 
 <script>
 const out = document.getElementById("out");
 const cmd = document.getElementById("cmd");
 let pending = null;
+
+document.querySelectorAll(".chip").forEach((b) => {
+  b.onclick = () => { cmd.value = b.dataset.text; cmd.focus(); };
+});
 
 function show(cls, text) {
   out.innerHTML = "";
@@ -92,43 +113,6 @@ async function confirmRun() {
     show("ok", "Done! " + data.results.join(" | "));
   } catch (e) { show("err", e.message); }
 }
-</script>
-  <style>
-  .pp-tagline{margin:6px 0 14px;color:#475569;font-size:15px}
-  .pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-  .pp-chip{padding:8px 14px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;cursor:pointer;font-size:14px}
-  .pp-chip:hover{background:#eef2ff;border-color:#6366f1}
-  .pp-badge{margin:12px 0;padding:10px 14px;border-radius:10px;background:#ecfdf5;color:#065f46;font-size:13px;line-height:1.5}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  document.title = 'PayPilot';
-  var h = document.querySelector('h1');
-  if (h) {
-    h.textContent = 'PayPilot';
-    var tag = document.createElement('p');
-    tag.className = 'pp-tagline';
-    tag.textContent = 'Type a payment. AI sends it. You stay in control.';
-    h.parentNode.insertBefore(tag, h.nextSibling);
-  }
-  var input = document.querySelector('textarea, input[type="text"], input:not([type])');
-  if (!input) return;
-  var wrap = document.createElement('div');
-  wrap.className = 'pp-chips';
-  ['Pay Meera $50', 'Pay Meera $50 and Arjun $75', 'Pay Sam $20'].forEach(function (t) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'pp-chip';
-    b.textContent = t;
-    b.onclick = function () { input.value = t; input.focus(); };
-    wrap.appendChild(b);
-  });
-  var badge = document.createElement('div');
-  badge.className = 'pp-badge';
-  badge.innerHTML = '<b>Safety:</b> Sandbox mode &bull; Nothing is sent until you confirm &bull; Unknown contacts are blocked';
-  input.parentNode.insertBefore(wrap, input.nextSibling);
-  input.parentNode.insertBefore(badge, wrap.nextSibling);
-});
 </script>
 </body>
 </html>
