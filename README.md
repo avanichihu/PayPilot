@@ -105,8 +105,8 @@ paypal-agent/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/avanichihu/paypal-agent.git
-cd paypal-agent
+git clone https://github.com/avanichihu/paypilot.git
+cd paypilot
 ```
 
 ### 2. Install dependencies
