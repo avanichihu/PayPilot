@@ -93,5 +93,42 @@ async function confirmRun() {
   } catch (e) { show("err", e.message); }
 }
 </script>
+  <style>
+  .pp-tagline{margin:6px 0 14px;color:#475569;font-size:15px}
+  .pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .pp-chip{padding:8px 14px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;cursor:pointer;font-size:14px}
+  .pp-chip:hover{background:#eef2ff;border-color:#6366f1}
+  .pp-badge{margin:12px 0;padding:10px 14px;border-radius:10px;background:#ecfdf5;color:#065f46;font-size:13px;line-height:1.5}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.title = 'PayPilot';
+  var h = document.querySelector('h1');
+  if (h) {
+    h.textContent = 'PayPilot';
+    var tag = document.createElement('p');
+    tag.className = 'pp-tagline';
+    tag.textContent = 'Type a payment. AI sends it. You stay in control.';
+    h.parentNode.insertBefore(tag, h.nextSibling);
+  }
+  var input = document.querySelector('textarea, input[type="text"], input:not([type])');
+  if (!input) return;
+  var wrap = document.createElement('div');
+  wrap.className = 'pp-chips';
+  ['Pay Meera $50', 'Pay Meera $50 and Arjun $75', 'Pay Sam $20'].forEach(function (t) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pp-chip';
+    b.textContent = t;
+    b.onclick = function () { input.value = t; input.focus(); };
+    wrap.appendChild(b);
+  });
+  var badge = document.createElement('div');
+  badge.className = 'pp-badge';
+  badge.innerHTML = '<b>Safety:</b> Sandbox mode &bull; Nothing is sent until you confirm &bull; Unknown contacts are blocked';
+  input.parentNode.insertBefore(wrap, input.nextSibling);
+  input.parentNode.insertBefore(badge, wrap.nextSibling);
+});
+</script>
 </body>
 </html>
